@@ -47,7 +47,7 @@ def new_vehicle():
         year = int(request.form.get("year"))
         price = float(request.form.get("price"))
         fuel = request.form.get("fuel")
-        if make and model and year and price and fuel:
+        if make:
             new_car = Automobil(make=make.title(), model=model,
                                 color=color.lower(), year=year,
                                 price=price, fuel_type=fuel.lower())
