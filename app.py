@@ -18,8 +18,15 @@ def home():
     if search_text:
         filtered_rows = (Automobil.query.filter
                          (Automobil.make.ilike(f"%{search_text}%")))
+        all_prices = []
+        all_years = []
+        for car_row in filtered_rows:
+            all_prices.append(car_row.price)
+            all_years.append(car_row.year)
+        price_sum = sum(all_prices)
+        avg_year = int(round(sum(all_years) / len(all_years)))
         return (render_template
-                ("all_cars_main.html", cars=filtered_rows))
+                ("all_cars_main.html", cars=filtered_rows, price_sum=price_sum, avg_year=avg_year))
 
     else:
         all_cars = Automobil.query.all()
