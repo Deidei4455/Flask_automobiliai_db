@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<h4>Vehicle list</h4>
+<form action="" method="get">
+    <p><input type="text" name="search"></p>
+    <p><input type="submit" value="search by make"></p>
+</form>
+<p><a href="/vehicle/new">Create a new vehicle ad</a></p>
+<table>
+  <tr>
+    <th>id</th>
+    <th>make</th>
+    <th>model</th>
+    <th>color</th>
+    <th>year</th>
+    <th>price</th>
+    <th>fuel type</th>
+    <th>date created</th>
+  </tr>
+    {% for car in cars %}
+    <tr>
+        <td>{{ car.id }}</td>
+        <td>{{ car.make }}</td>
+        <td>{{ car.model }}</td>
+        <td>{{ car.color }}</td>
+        <td>{{ car.year }}</td>
+        <td>{{ car.price }}</td>
+        <td>{{ car.fuel_type }}</td>
+        <td>{{ car.date_created }}</td>
+        <td>
+            <a href="/vehicle/{{ car.id }}">show</a>
+            <a href="/vehicle/edit/{{ car.id }}">edit</a>
+            <form action="/vehicle/delete/{{ car.id }}" method="post" style="display:inline;">
+                <input type="submit" value="delete">
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
