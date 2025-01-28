@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+
+{% block content %}
 <head>
-    <meta charset="UTF-8">
     <title>{{ car.make }} {{ car.model }} {{ car.year }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
 <h4>{{ car.make }} {{ car.model }} {{ car.year }}</h4>
 <p>id: {{ car.id }}.</p>
 <p>color: {{ car.color }}.</p>
@@ -13,5 +11,4 @@
 <p>fuel type: {{ car.fuel_type }}</p>
 <p>date created: {{ car.date_created }}</p>
 <p><a href="/">Back to all vehicle ads</a></p>
-</body>
-</html>
+{% endblock %}

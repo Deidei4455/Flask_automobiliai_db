@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cars</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
 <h4>Vehicle list</h4>
 <form action="" method="get">
     <p><input type="text" name="search"></p>
@@ -51,5 +46,4 @@
         <td>Total: {{ price_sum }}</td>
     </tr>
 </table>
-</body>
-</html>
+{% endblock %}

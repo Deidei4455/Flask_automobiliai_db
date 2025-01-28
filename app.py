@@ -19,7 +19,7 @@ def home():
         filtered_rows = (Automobil.query.filter
                          (Automobil.make.ilike(f"%{search_text}%")))
         return (render_template
-                ("index_css.html", cars=filtered_rows))
+                ("all_cars_main.html", cars=filtered_rows))
 
     else:
         all_cars = Automobil.query.all()
@@ -31,7 +31,7 @@ def home():
         price_sum = sum(all_prices)
         avg_year = int(round(sum(all_years) / len(all_years)))
         return (render_template
-                ("index_css.html", cars=all_cars, price_sum=price_sum, avg_year=avg_year))
+                ("all_cars_main.html", cars=all_cars, price_sum=price_sum, avg_year=avg_year))
 
 
 @app.route("/vehicle/<int:row_id>")
