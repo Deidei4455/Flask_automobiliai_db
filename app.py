@@ -23,8 +23,15 @@ def home():
 
     else:
         all_cars = Automobil.query.all()
+        all_prices = []
+        all_years = []
+        for car_row in all_cars:
+            all_prices.append(car_row.price)
+            all_years.append(car_row.year)
+        price_sum = sum(all_prices)
+        avg_year = int(round(sum(all_years) / len(all_years)))
         return (render_template
-                ("index_css.html", cars=all_cars))
+                ("index_css.html", cars=all_cars, price_sum=price_sum, avg_year=avg_year))
 
 
 @app.route("/vehicle/<int:row_id>")
