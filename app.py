@@ -15,30 +15,21 @@ with app.app_context():
 @app.route("/")
 def home():
     search_text = request.args.get("search")
+    car_rows = None
     if search_text:
-        filtered_rows = (Automobil.query.filter
-                         (Automobil.make.ilike(f"%{search_text}%")))
-        all_prices = []
-        all_years = []
-        for car_row in filtered_rows:
-            all_prices.append(car_row.price)
-            all_years.append(car_row.year)
-        price_sum = sum(all_prices)
-        avg_year = int(round(sum(all_years) / len(all_years)))
-        return (render_template
-                ("all_cars_main.html", cars=filtered_rows, price_sum=price_sum, avg_year=avg_year))
-
-    else:
-        all_cars = Automobil.query.all()
-        all_prices = []
-        all_years = []
-        for car_row in all_cars:
-            all_prices.append(car_row.price)
-            all_years.append(car_row.year)
-        price_sum = sum(all_prices)
-        avg_year = int(round(sum(all_years) / len(all_years)))
-        return (render_template
-                ("all_cars_main.html", cars=all_cars, price_sum=price_sum, avg_year=avg_year))
+        car_rows = (Automobil.query.filter
+                    (Automobil.make.ilike(f"%{search_text}%")))
+    elif not search_text:
+        car_rows = Automobil.query.all()
+    all_prices = []
+    all_years = []
+    for car_row in car_rows:
+        all_prices.append(car_row.price)
+        all_years.append(car_row.year)
+    price_sum = sum(all_prices)
+    avg_year = int(round(sum(all_years) / len(all_years)))
+    return (render_template
+            ("all_cars_main.html", cars=car_rows, price_sum=price_sum, avg_year=avg_year))
 
 
 @app.route("/vehicle/<int:row_id>")
